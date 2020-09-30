@@ -1,4 +1,4 @@
-package com.tony.basis.class01;
+package com.tony.basis;
 
 /**
  * @author: Tony.Chen

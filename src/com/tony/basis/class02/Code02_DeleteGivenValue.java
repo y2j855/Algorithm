@@ -5,7 +5,7 @@ package com.tony.basis.class02;
  * Create Time : 2020/9/29 15:52
  * Description:
  */
-public class Code2_DeleteGivenValue {
+public class Code02_DeleteGivenValue {
 
     public static Node removeListValue(Node head, int number) {
         while (head != null) {
@@ -27,7 +27,7 @@ public class Code2_DeleteGivenValue {
         return head;
     }
 
-    public static DoubleNode removeDoubleListValue(DoubleNode head, int number) {
+    public static DoubleNode<Integer> removeDoubleListValue(DoubleNode<Integer> head, int number) {
         while (head != null) {
             if (head.value != number) {
                 break;
@@ -35,9 +35,9 @@ public class Code2_DeleteGivenValue {
             head = head.next;
             head.pre = null;
         }
-        DoubleNode pre = head;
-        DoubleNode cur = head;
-        DoubleNode temp = head;
+        DoubleNode<Integer> pre = head;
+        DoubleNode<Integer> cur = head;
+        DoubleNode<Integer> temp = head;
         while (cur != null) {
             if (cur.value == number) {
                 pre.next = cur.next;    //去掉要删除节点一下个的引用
