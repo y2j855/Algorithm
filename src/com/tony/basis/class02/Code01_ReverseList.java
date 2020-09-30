@@ -9,25 +9,6 @@ import java.util.ArrayList;
  */
 public class Code01_ReverseList {
 
-    private static class Node {
-        public int value;
-        public Node next;
-
-        public Node(int value) {
-            this.value = value;
-        }
-    }
-
-    private static class DoubleNode {
-        public int value;
-        public DoubleNode pre;
-        public DoubleNode next;
-
-        public DoubleNode(int value) {
-            this.value = value;
-        }
-    }
-
     /**
      * 单向链表反转
      * @param head

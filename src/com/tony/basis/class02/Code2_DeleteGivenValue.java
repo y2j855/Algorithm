@@ -7,37 +7,6 @@ package com.tony.basis.class02;
  */
 public class Code2_DeleteGivenValue {
 
-    private static class Node {
-        public int value;
-        public Node next;
-
-        public Node(int value) {
-            this.value = value;
-        }
-
-        public void setNext(Node next) {
-            this.next = next;
-        }
-    }
-
-    private static class DoubleNode {
-        public int value;
-        public DoubleNode pre;
-        public DoubleNode next;
-
-        public DoubleNode(int value) {
-            this.value = value;
-        }
-
-        public void setPre(DoubleNode pre) {
-            this.pre = pre;
-        }
-
-        public void setNext(DoubleNode next) {
-            this.next = next;
-        }
-    }
-
     public static Node removeListValue(Node head, int number) {
         while (head != null) {
             if (head.value != number) {
