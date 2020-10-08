@@ -1,9 +1,14 @@
 package com.tony.basis.class02;
 
+import com.tony.basis.GenericsUtils;
+
 import java.lang.reflect.Array;
+import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author: Tony.Chen
@@ -14,6 +19,9 @@ public class Stack<T> {
     private static final int SIZE = 7;
     private T[] array;
     public int index = 0;
+
+    List<String> stringList = new ArrayList<String>();
+    List<Integer> integerList = new ArrayList<Integer>();
 
     public Stack(Class<T> type) {
         array = (T[])Array.newInstance(type,SIZE);
@@ -59,7 +67,7 @@ public class Stack<T> {
         return index == 0;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoSuchFieldException {
         Stack<Integer> stack = new Stack<Integer>(Integer.class);
 //        stack.push(1);
 //        stack.push(2);
@@ -80,6 +88,12 @@ public class Stack<T> {
 //        System.out.println(stack.peek());
 //        System.out.println(stack.pop());
 //        System.out.println(stack.peek());
+
+        System.out.println("==========");
+
+        System.out.println(GenericsUtils.getFieldGenricType(Stack.class,"stringList"));
+
+        System.out.println(GenericsUtils.getFieldGenricType(Stack.class,"integerList"));
 
     }
 }
