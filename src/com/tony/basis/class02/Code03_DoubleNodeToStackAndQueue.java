@@ -10,7 +10,6 @@ import java.util.Stack;
  * @author: Tony.Chen
  * Create Time : 2020/9/30 10:30
  * Description:使用双向链表实现栈和队列
- * Description:使用双向链表实现栈和队列
  */
 public class Code03_DoubleNodeToStackAndQueue {
 
