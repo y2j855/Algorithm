@@ -1,5 +1,6 @@
 package com.tony.basis.class05;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -30,6 +31,7 @@ public class Code04_RadixSort {
     }
 
     /**
+     * 核心就是用2个数组代替了10个桶
      * @param array 需要排序的数组
      * @param L 起始位置下标
      * @param R 结束位置下标
@@ -155,29 +157,83 @@ public class Code04_RadixSort {
         System.out.println();
     }
 
+    /**
+     * 用传统的方法，10个桶装入对应的值
+     * @param arr
+     */
+    public static void sort(int[] arr){
+        int length = arr.length;
 
-    public static void main(String[] args) {
-        int testTime = 500000;
-        int maxSize = 100;
-        int maxValue = 100000;
-        boolean succeed = true;
-        for (int i = 0; i < testTime; i++) {
-            int[] arr1 = generateRandomArray(maxSize,maxValue);
-            int[] arr2 = copyArray(arr1);
-            radixSort(arr1);
-            comparator(arr2);
-            if(!isEqual(arr1,arr2)){
-                succeed = false;
-                printArrat(arr1);
-                printArrat(arr2);
-                break;
+        //最大值
+        int max = arr[0];
+        for(int i = 0;i < length;i++){
+            if(arr[i] > max){
+                max = arr[i];
             }
         }
-        System.out.println(succeed ? "Nice!" : "function error!");
+        //当前排序位置
+        int location = 1;
 
-        int[] arr = generateRandomArray(maxSize,maxValue);
-        printArrat(arr);
-        radixSort(arr);
-        printArrat(arr);
+        //桶列表
+        ArrayList<ArrayList<Integer>> bucketList = new ArrayList<>();
+
+        //长度为10 装入余数0-9的数据
+        for(int i = 0; i < 10; i++){
+            bucketList.add(new ArrayList());
+        }
+
+        while(true)
+        {
+            //判断是否排完
+            int dd = (int)Math.pow(10,(location - 1));
+            if(max < dd){
+                break;
+            }
+
+            //数据入桶
+            for(int i = 0; i < length; i++)
+            {
+                //计算余数 放入相应的桶
+                int number = ((arr[i] / dd) % 10);
+                bucketList.get(number).add(arr[i]);
+            }
+
+            //写回数组
+            int nn = 0;
+            for (int i=0;i<10;i++){
+                int size = bucketList.get(i).size();
+                for(int ii = 0;ii < size;ii ++){
+                    arr[nn++] = bucketList.get(i).get(ii);
+                }
+                bucketList.get(i).clear();
+            }
+            location++;
+        }
+    }
+
+    public static void main(String[] args) {
+//        int testTime = 500000;
+//        int maxSize = 100;
+//        int maxValue = 100000;
+//        boolean succeed = true;
+//        for (int i = 0; i < testTime; i++) {
+//            int[] arr1 = generateRandomArray(maxSize,maxValue);
+//            int[] arr2 = copyArray(arr1);
+//            radixSort(arr1);
+//            comparator(arr2);
+//            if(!isEqual(arr1,arr2)){
+//                succeed = false;
+//                printArrat(arr1);
+//                printArrat(arr2);
+//                break;
+//            }
+//        }
+//        System.out.println(succeed ? "Nice!" : "function error!");
+//
+//        int[] arr = generateRandomArray(maxSize,maxValue);
+//        printArrat(arr);
+//        radixSort(arr);
+//        printArrat(arr);
+
     }
 }
