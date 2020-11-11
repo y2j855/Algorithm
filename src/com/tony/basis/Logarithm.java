@@ -1,4 +1,4 @@
-package com.tony.basis.class01;
+package com.tony.basis;
 
 import java.util.Arrays;
 
@@ -16,6 +16,7 @@ import java.util.Arrays;
  * 当样本数量很多时比对测试依然正确，可以确定方法a已经正确。
  */
 public final class Logarithm {
+
     //打印数组的值
     public static void printArray(int[] arr) {
         if (arr == null) {

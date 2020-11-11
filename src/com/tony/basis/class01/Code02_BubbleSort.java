@@ -1,5 +1,6 @@
 package com.tony.basis.class01;
 
+import com.tony.basis.Logarithm;
 import com.tony.basis.StopWatch;
 
 /**

@@ -12,6 +12,10 @@ public class StopWatch {
         this.start = System.currentTimeMillis();
     }
 
+    /**
+     * 运行多少秒
+     * @return
+     */
     public double elapsedTime() {
         long now = System.currentTimeMillis();
         return (now - start) / 1000;
