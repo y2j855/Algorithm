@@ -14,7 +14,7 @@ public class Code03_PartitionAndQuickSort {
     }
 
     /**
-     * 给定一个数组arr，和一个整数num。num为数组最后一个元素
+     * 给定一个数组arr，和一个整数num。num为数组最后一个元素 num就是pivot(基准)
      * 请把小于等于num的数放在数组的左边，大于num的数放在数组的右边。(左右两边的数可以无序)
      *
      * @param arr 数组
@@ -167,7 +167,7 @@ public class Code03_PartitionAndQuickSort {
 
     public static void main(String[] args) {
         int[] arr = {2, 3, 4, 1, 7, 3, 3};
-        quickSort3(arr);
+        quickSort1(arr);
 
         for (int i = 0; i < arr.length; i++) {
             System.out.print(arr[i] + " ");

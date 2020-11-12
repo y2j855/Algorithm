@@ -65,7 +65,7 @@ public class MyMaxHeap {
 
     /**
      * 进行下沉操作
-     * 保证剩余元素还是大根堆
+     * 删除最大值，保证剩余元素还是大根堆
      *
      * @param arr
      * @param index

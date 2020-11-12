@@ -49,7 +49,7 @@ public class Code01_MergeSort {
     }
 
     /**
-     * 递归调用实现归并排序
+     * 递归调用实现归并排序   自上而下的
      *
      * T(N) = 2*(N/2) + O(N)
      * 根据公式：T(N) = a*T(N/b) + O(N^d)
@@ -86,7 +86,7 @@ public class Code01_MergeSort {
     }
 
     /**
-     * 非递归归并排序
+     * 非递归归并排序  自下而上的
      *
      * @param arr
      */
@@ -141,5 +141,10 @@ public class Code01_MergeSort {
             }
         }
         System.out.println(succeed ? "Nice!" : "Oops!");
+
+        int[] arr = Logarithm.generateRandomArray(maxSize,maxValue);
+        Logarithm.printArray(arr);
+        mergeSort1(arr);
+        Logarithm.printArray(arr);
     }
 }
