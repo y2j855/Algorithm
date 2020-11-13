@@ -71,24 +71,31 @@ public class Code05_FindFirstIntersectNode {
         return fast;
     }
 
+    /**
+     * 1.判断2个单向链表是否有环
+     * 2.如果2个链表都没有环，判断是否有公共部分，如果有证明相交，如果没有证明不相交
+     * 3.如果一个链表有环，另一个没有环，肯定不会相交。
+     * 4.如果2个链表相交，需要判断三种情况
+     *
+     * @param head1
+     * @param head2
+     * @return
+     */
     public static Node getIntersectNode(Node head1, Node head2) {
         if (head1 == null || head2 == null) {
             return null;
         }
         /**
-         * 1.判断2个单向链表是否有环
-         * 2.如果2个链表都没有环，判断是否有公共部分，如果有证明相交，如果没有证明不相交
-         * 3.如果一个链表有环，另一个没有环，肯定不会相交。
-         * 4.如果2个链表相交，需要判断三种情况
+
          */
         Node intersectNode = null;
-        Node node1 = loopNodeByPointer(head1);
-        Node node2 = loopNodeByPointer(head2);
+        Node loop1 = loopNodeByPointer(head1);
+        Node loop2 = loopNodeByPointer(head2);
 
-        if (node1 == null && node2 == null) {
+        if (loop1 == null && loop2 == null) {
             intersectNode = noLoop(head1, head2);
-        }else if(node1 != null && node2 != null){
-            intersectNode = bothLoop(node1,node2);
+        } else if (loop1 != null && loop2 != null) {
+            intersectNode = bothLoop(head1, loop1, head2, loop2);
         }
         return intersectNode;
 
@@ -98,26 +105,52 @@ public class Code05_FindFirstIntersectNode {
      * 判断2个都有环的单向链表是否相交
      * 三种情况
      * 1.独立的2个不相交环链表
-     * 2.有同一个入环节点的2个链表，证明它们相交
+     * 2.有同一个入环节点的2个链表，证明它们相交，但是要注意，同一个入环节点并不代表是第一个入环节点。
      * 3.不同入环节点的2个链表，通过循环遍历环，让loop1遍历，找loop2如果找到，证明它们在同一个环上，从而证明相交。如果没有证明是1情况。
+     *
+     * @param head1
      * @param loop1
+     * @param head2
      * @param loop2
      * @return
      */
-    private static Node bothLoop(Node loop1, Node loop2) {
+    private static Node bothLoop(Node head1, Node loop1, Node head2, Node loop2) {
         Node intersectNode = null;
+        Node current1 = head1;
+        Node current2 = head2;
         //第二种情况
-        if(loop1 == loop2){
+        if (loop1 == loop2) {
             //TODO 逻辑错误,要找第一个相交节点，而不是最后一个
-            intersectNode = loop1;
-        }else{
-            while (loop1 != null){
-                if(loop1 == loop2){
-                    intersectNode = loop1;
-                    break;
-                }
-                loop1 = loop1.next;
+            int length = 0;
+            while (current1.next != loop1) {
+                length++;
+                current1 = current1.next;
             }
+            while (current2.next != loop2) {
+                length--;
+                current2 = current2.next;
+            }
+
+            current1 = length >= 0 ? head1 : head2;
+            current2 = current1 == head1 ? head2 : head1;
+            length = Math.abs(length);
+
+            while (length > 0) {
+                length--;
+                current1 = current1.next;
+            }
+            while (current1 != current2) {
+                current1 = current1.next;
+                current2 = current2.next;
+            }
+            intersectNode = current1;
+        } else {
+            //TODO 是否需要这样做?因为loop1，loop2都可以代表入环节点
+            current1 = loop1;
+            while (current1 != loop2) {
+                current1 = current1.next;
+            }
+            intersectNode = loop1;
         }
         return intersectNode;
     }
@@ -133,59 +166,47 @@ public class Code05_FindFirstIntersectNode {
      * @return
      */
     private static Node noLoop(Node node1, Node node2) {
-        //TODO 需要重构代码
-        Node intersect = null;
         Node current1 = node1;
         Node current2 = node2;
-        Node end1 = null;
-        Node end2 = null;
         int length = 0;
 
-        while (current1 != null) {
+        while (current1.next != null) {
             length++;
-            if (current1.next == null) {
-                end1 = current1;
-            }
             current1 = current1.next;
         }
 
-        while (current2 != null) {
+        while (current2.next != null) {
             length--;
-            if (current2.next == null) {
-                end2 = current2;
-            }
             current2 = current2.next;
         }
 
-        if (end1 != end2) {
+        if (current1 != current2) {
             return null;
         }
 
-        if (length > 0) {
-            while (length > 0) {
-                length--;
-                node1 = node1.next;
-            }
-        } else {
-            while (length < 0) {
-                length++;
-                node2 = node2.next;
-            }
+        /**
+         * 重构代码
+         * 保证长度长的位current1，短的为current2
+         */
+        current1 = length >= 0 ? node1 : node2;
+        current2 = current1 == node1 ? node2 : node1;
+        length = Math.abs(length);
+
+        while (length > 0) {
+            length--;
+            current1 = current1.next;
         }
-        while (node1 != null) {
-            if (node1.value == node2.value) {
-                intersect = node1;
-                break;
-            }
-            node1 = node1.next;
-            node2 = node2.next;
+
+        while (current1 != current2) {
+            current1 = current1.next;
+            current2 = current2.next;
         }
-        return intersect;
+        return current1;
     }
 
 
-
     public static void main(String[] args) {
+        System.out.println("============2条无环链表");
         // 1->2->3->4->5->6->7->null
         Node head1 = new Node(1);
         head1.next = new Node(2);
@@ -202,6 +223,7 @@ public class Code05_FindFirstIntersectNode {
         head2.next.next.next = head1.next.next.next.next.next; // 8->6
         System.out.println(getIntersectNode(head1, head2).value);
 
+        System.out.println("============同一入环节点，不是第一个入环节点");
         // 1->2->3->4->5->6->7->4...
         head1 = new Node(1);
         head1.next = new Node(2);
@@ -219,11 +241,27 @@ public class Code05_FindFirstIntersectNode {
         head2.next.next.next = head1.next; // 8->2
         System.out.println(getIntersectNode(head1, head2).value);
 
+        System.out.println("============不同入环节点");
         // 0->9->8->6->4->5->6..
         head2 = new Node(0);
         head2.next = new Node(9);
         head2.next.next = new Node(8);
         head2.next.next.next = head1.next.next.next.next.next; // 8->6
         System.out.println(getIntersectNode(head1, head2).value);
+
+        System.out.println("============同一入环节点，并且是第一个入环节点");
+        //1-2-3-6-7-3
+        head1 = new Node(1);
+        head1.next = new Node(2);
+        head1.next.next = new Node(3);
+        head1.next.next.next = new Node(6);
+        head1.next.next.next.next = new Node(7);
+        head1.next.next.next.next = head1.next.next; //7-3
+
+        //9-8-3
+        head2 = new Node(9);
+        head2.next = new Node(8);
+        head2.next.next = head1.next.next;//8-3
+        System.out.println(getIntersectNode(head1,head2).value);
     }
 }
