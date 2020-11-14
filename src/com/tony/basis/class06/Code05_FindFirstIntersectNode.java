@@ -48,7 +48,7 @@ public class Code05_FindFirstIntersectNode {
      * @return
      */
     public static Node loopNodeByPointer(Node head) {
-        if (head == null) {
+        if (head == null || head.next == null || head.next.next == null) {
             return null;
         }
         //定义快慢指针
@@ -206,9 +206,17 @@ public class Code05_FindFirstIntersectNode {
 
 
     public static void main(String[] args) {
-        System.out.println("============2条无环链表");
-        // 1->2->3->4->5->6->7->null
+        System.out.println("============2条无环链表不相交");
         Node head1 = new Node(1);
+        head1.next = new Node(2);
+
+        Node head2 = new Node(3);
+        head2.next = new Node(4);
+        System.out.println(getIntersectNode(head1,head2));
+
+        System.out.println("============2条无环链表相交");
+        // 1->2->3->4->5->6->7->null
+        head1 = new Node(1);
         head1.next = new Node(2);
         head1.next.next = new Node(3);
         head1.next.next.next = new Node(4);
@@ -217,7 +225,7 @@ public class Code05_FindFirstIntersectNode {
         head1.next.next.next.next.next.next = new Node(7);
 
         // 0->9->8->6->7->null
-        Node head2 = new Node(0);
+        head2 = new Node(0);
         head2.next = new Node(9);
         head2.next.next = new Node(8);
         head2.next.next.next = head1.next.next.next.next.next; // 8->6
