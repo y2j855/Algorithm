@@ -22,7 +22,7 @@ public class Code03_LevelTraversalBinaryTree {
         queue.add(head);
         while (!queue.isEmpty()){
             Node current = queue.poll();
-            System.out.println(current.value);
+            System.out.print(current.value + " ");
             if(current.left != null){
                 queue.add(current.left);
             }
@@ -30,6 +30,7 @@ public class Code03_LevelTraversalBinaryTree {
                 queue.add(current.right);
             }
         }
+        System.out.println("按层遍历");
     }
 
     public static void main(String[] args) {

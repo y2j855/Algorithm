@@ -23,7 +23,7 @@ public class Code02_UnRecursiveTraversalBinaryTree {
         stack.push(head);
         while (!stack.isEmpty()) {
             Node current = stack.pop();
-            System.out.println(current.value);
+            System.out.print(current.value + " ");
             if (current.right != null) {
                 stack.push(current.right);
             }
@@ -31,6 +31,7 @@ public class Code02_UnRecursiveTraversalBinaryTree {
                 stack.push(current.left);
             }
         }
+        System.out.println("非递归前序遍历");
     }
 
     /**
@@ -78,10 +79,11 @@ public class Code02_UnRecursiveTraversalBinaryTree {
                 head = head.left;
             }else{
                 head = stack.pop();
-                System.out.println(head.value);
+                System.out.print(head.value + " ");
                 head = head.right;
             }
         }
+        System.out.println("非递归中序遍历");
     }
 
 
@@ -112,8 +114,9 @@ public class Code02_UnRecursiveTraversalBinaryTree {
         }
 
         while (!output.isEmpty()) {
-            System.out.println(output.pop().value);
+            System.out.print(output.pop().value + " ");
         }
+        System.out.println("非递归2个栈后序遍历");
     }
 
     /**
@@ -141,10 +144,11 @@ public class Code02_UnRecursiveTraversalBinaryTree {
             }else if(untreated.right != null && head != untreated.right){
                 stack.push(untreated.right);
             }else{
-                System.out.println(stack.pop().value);
+                System.out.print(stack.pop().value + " ");
                 head = untreated;
             }
         }
+        System.out.println("非递归变量后序遍历");
     }
 
     public static void main(String[] args) {

@@ -9,43 +9,45 @@ public class Code01_RecursiveTraversalBinaryTree {
 
     /**
      * 二叉树递归前序遍历
+     *
      * @param head
      */
-    public static void preorderTraversal(Node head){
-        if(head==null){
+    public static void preorderTraversal(Node head) {
+        if (head == null) {
             return;
         }
-        System.out.println(head.value);
+        System.out.print(head.value + " ");
         preorderTraversal(head.left);
         preorderTraversal(head.right);
     }
 
     /**
      * 二叉树递归中序遍历
+     *
      * @param head
      */
-    public static void inorderTraversal(Node head){
-        if(head==null){
+    public static void inorderTraversal(Node head) {
+        if (head == null) {
             return;
         }
         inorderTraversal(head.left);
-        System.out.println(head.value);
+        System.out.print(head.value + " ");
         inorderTraversal(head.right);
     }
 
     /**
      * 二叉树递归后序遍历
+     *
      * @param head
      */
-    public static void postorderTraversal(Node head){
-        if(head==null){
+    public static void postorderTraversal(Node head) {
+        if (head == null) {
             return;
         }
         postorderTraversal(head.left);
         postorderTraversal(head.right);
-        System.out.println(head.value);
+        System.out.print(head.value + " ");
     }
-
 
 
     public static void main(String[] args) {
@@ -58,10 +60,10 @@ public class Code01_RecursiveTraversalBinaryTree {
         head.right.right = new Node(7);
 
         preorderTraversal(head);
-        System.out.println("========");
+        System.out.println("========前序递归");
         inorderTraversal(head);
-        System.out.println("========");
+        System.out.println("========中序递归");
         postorderTraversal(head);
-        System.out.println("========");
+        System.out.println("========后序递归");
     }
 }
