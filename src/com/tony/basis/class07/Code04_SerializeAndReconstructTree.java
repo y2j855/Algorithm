@@ -134,9 +134,10 @@ public class Code04_SerializeAndReconstructTree {
     }
 
     /**
-     * 完全按照按层遍历的逻辑记性反序列化
+     * 完全按照按层遍历的逻辑进行反序列化
      * 拿到父节点，然后将左节点右节点赋值
      * 按照按层遍历逻辑进行判断
+     *
      * @param serial
      * @return
      */
@@ -151,12 +152,66 @@ public class Code04_SerializeAndReconstructTree {
             Node current = data.poll();
             current.left = generateNode(serial.poll());
             current.right = generateNode(serial.poll());
-            if(current.left != null){
+            if (current.left != null) {
                 data.add(current.left);
             }
-            if(current.right != null){
+            if (current.right != null) {
                 data.add(current.right);
             }
+        }
+        return head;
+    }
+
+    /**
+     * 按层遍历反序列化，接收int类型数组，为打印二叉树使用
+     *
+     * @param serial
+     * @return
+     */
+    public static Node leveUnSerialUseArray(Integer[] serial) {
+        if (serial == null || serial.length == 0) {
+            return null;
+        }
+        //1.判null
+        //2.拿头节点
+        //3.数组从1开始循环遍历，如果数组里变有null，做判断。
+        Queue<Node> queue = new LinkedList<>();
+        Node head = new Node(serial[0]);
+        queue.offer(head);
+        Node current = null;
+
+        //当前层开始的下标位置
+        int startIndex = 1;
+        //当前层的节点个数
+        int currentLevelNum = 2;
+        //数组中剩余的节点个数
+        int restLength = serial.length - 1;
+
+        while(restLength > 0) {
+            //i+2:因为按层遍历需要一次对左右节点进行同时操作
+            for (int i = startIndex; i < startIndex + currentLevelNum; i = i + 2) {
+                //已没有节点可以使用，直接跳出循环头节点
+                if (i == serial.length) {
+                    return head;
+                }
+                current = queue.poll();
+                if (serial[i] != null) {
+                    current.left = new Node(serial[i]);
+                    queue.offer(current.left);
+                    startIndex++;
+                }
+                if (i + 1 == serial.length) {
+                    return head;
+                }
+                if (serial[i + 1] != null) {
+                    current.right = new Node(serial[i + 1]);
+                    queue.offer(current.right);
+                    startIndex++;
+                }
+            }
+            currentLevelNum = (startIndex - 1) << 1;
+//            currentLevelNum = queue.size() << 1;
+            restLength -= startIndex;
         }
         return head;
     }
@@ -203,5 +258,9 @@ public class Code04_SerializeAndReconstructTree {
 
         Node node = levelUnSerial1(queue);
         System.out.println(node);
+
+        Integer[] numbers = {5, 4, 8, 11, null, 13, 4, 7, 2, null, null, null, 1};
+        Node test = leveUnSerialUseArray(numbers);
+        System.out.println(test);
     }
 }
