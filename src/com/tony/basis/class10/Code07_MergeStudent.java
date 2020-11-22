@@ -14,7 +14,7 @@ import java.util.Map;
  * 逻辑思路
  * 1.将数组中所有学生放到并查集里
  * 2.建立三个Map，分别存学生的三个属性
- * 3.当某个属性相等时，将并查集里的对象合并，最后并查集的大小就是学生个数
+ * 3.当某个属性相等时，将并查集里的对象合并，最后并查集的代表点大小就是学生个数
  */
 public class Code07_MergeStudent {
     private static class Student{
@@ -65,17 +65,17 @@ public class Code07_MergeStudent {
         Student s1 = new Student("1","1","1");
         Student s2 = new Student("2","1","2");
         Student s3 = new Student("3","3","2");
-        Student s4 = new Student("4","4","4");
-        Student s5 = new Student("5","5","5");
-        Student s6 = new Student("6","6","4");
+//        Student s4 = new Student("4","4","4");
+//        Student s5 = new Student("5","5","5");
+//        Student s6 = new Student("6","6","4");
 
         List<Student> array = new ArrayList<>();
         array.add(s1);
         array.add(s2);
         array.add(s3);
-        array.add(s4);
-        array.add(s5);
-        array.add(s6);
+//        array.add(s4);
+//        array.add(s5);
+//        array.add(s6);
 
         System.out.println(studentNumber(array));
 
