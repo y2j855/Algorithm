@@ -1,4 +1,4 @@
-package com.tony.basis.class09;
+package com.tony.basis.class09.recursion;
 
 import com.tony.basis.StopWatch;
 
@@ -79,10 +79,11 @@ public class Recursion {
     /**
      * 正常递归
      * 3.菲波那切数列 1+1+2+3+5+8+...+n
-     * 1.f(1) = 1
-     * 2.f(2) = 1
-     * 3.f(3) = f(2)+f(1)
-     * 4.f(n) = f(n-1) + f(n-2)
+     * 1.f(0) = 0
+     * 2.f(1) = 1
+     * 3.f(2) = f(0) + f(1) = 1
+     * 4.f(3) = f(1) + f(2) = 2
+     * 5.f(n) = f(n-2) + f(n-1) = n
      *
      * @param n
      * @return
@@ -97,9 +98,9 @@ public class Recursion {
     /**
      * 尾递归实现，性能比1要好
      *
-     * @param n
-     * @param res1
-     * @param res2
+     * @param n     个数
+     * @param res1  f(0) = 0
+     * @param res2  f(1) = 1
      * @return
      */
     public static int fibonacci2(int n, int res1, int res2) {
@@ -291,7 +292,7 @@ public class Recursion {
      * 将最长的看成一块，其他的看成另一块
      * 1.n==1,证明只有一块，出口(base case)就是从A移动到C
      * 2.剩下看做一个整体，先从A-B，然后最长那块从A-C，然后在将这个整体从B移到C
-     *
+     * 时间复杂度O(2^n)
      * @param n 层数
      * @return 移动步数
      */
@@ -307,6 +308,22 @@ public class Recursion {
 
     private static void move(char c1, char c2) {
         System.out.println(c1 + "->" + c2);
+    }
+
+    /**
+     * 一只青蛙可以一次跳1级台阶或一次跳2级台阶，例如：跳上第一级台阶只有一种跳法：直接跳1级即可。
+     * 跳上第二级台阶有两种跳法：每次跳1级，跳两次，或者一次跳2级。问要跳上第n级台阶有多少种跳法？
+     * @param n
+     * @return
+     */
+    public static int stepUp(int n){
+        if(n==1){
+            return 1;
+        }
+        if(n==2){
+            return 1;
+        }
+        return stepUp(n-1) + stepUp(n-2);
     }
 
     public static void main(String[] args) {
@@ -338,5 +355,7 @@ public class Recursion {
 
         System.out.println("汉诺塔游戏");
         towerOfHanoi(3, 'A', 'B', 'C');
+
+        System.out.println("青蛙跳台阶的方法="+stepUp(5));
     }
 }
