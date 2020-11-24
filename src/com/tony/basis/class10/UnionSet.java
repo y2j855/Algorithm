@@ -34,7 +34,7 @@ public class UnionSet<V> {
 
     public UnionSet(List<V> list) {
         for (V value : list) {
-            Node<V> current = (Node<V>) new Node<>(value);
+            Node<V> current = new Node<>(value);
             nodes.put(value, current);
             parents.put(current, current);
             sizeMap.put(current, 1);
