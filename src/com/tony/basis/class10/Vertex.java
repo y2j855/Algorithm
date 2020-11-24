@@ -16,11 +16,11 @@ public class Vertex {
      * nexts 顶点对应的邻居顶点
      * edges 顶点与邻居顶点形成的边
      */
-    private int value;
-    private int in;
-    private int out;
-    private List<Vertex> nexts;
-    private List<Edge> edges;
+    protected int value;
+    protected int in;
+    protected int out;
+    protected List<Vertex> nexts;
+    protected List<Edge> edges;
 
     public Vertex(int value) {
         this.value = value;
@@ -28,5 +28,20 @@ public class Vertex {
         this.out = 0;
         this.nexts = new ArrayList<>();
         this.edges = new ArrayList<>();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Vertex vertex = (Vertex) o;
+
+        return value == vertex.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return value;
     }
 }
