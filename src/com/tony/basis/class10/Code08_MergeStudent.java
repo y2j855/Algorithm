@@ -16,7 +16,7 @@ import java.util.Map;
  * 2.建立三个Map，分别存学生的三个属性
  * 3.当某个属性相等时，将并查集里的对象合并，最后并查集的代表点大小就是学生个数
  */
-public class Code07_MergeStudent {
+public class Code08_MergeStudent {
     private static class Student{
         private String cardId;
         private String accountId;
