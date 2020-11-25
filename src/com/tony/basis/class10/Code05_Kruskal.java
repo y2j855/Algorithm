@@ -74,6 +74,7 @@ public class Code05_Kruskal {
 
     /**
      * krusal最小生成树，返回边对象
+     * 它的最小维度是以边开始,经常用它来算权重值
      * @param graph
      * @return
      */
@@ -98,18 +99,6 @@ public class Code05_Kruskal {
                 result.add(current);
             }
         }
-        return result;
-    }
-
-
-    /**
-     * TODO 返回图对象
-     * @param graph
-     * @return
-     */
-    public static Graph mst(Graph graph){
-        Graph result = graph;
-
         return result;
     }
 
