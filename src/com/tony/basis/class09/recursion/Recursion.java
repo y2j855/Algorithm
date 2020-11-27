@@ -293,6 +293,7 @@ public class Recursion {
      * 1.n==1,证明只有一块，出口(base case)就是从A移动到C
      * 2.剩下看做一个整体，先从A-B，然后最长那块从A-C，然后在将这个整体从B移到C
      * 时间复杂度O(2^n)
+     * 如果是n层，移动步数一定是2^n-1
      * @param n 层数
      * @return 移动步数
      */
@@ -354,7 +355,7 @@ public class Recursion {
         System.out.println("两个数的最大公约数递归=" + greatestCommonDivisor(72, 56));
 
         System.out.println("汉诺塔游戏");
-        towerOfHanoi(3, 'A', 'B', 'C');
+        towerOfHanoi(3, '左', '中', '右');
 
         System.out.println("青蛙跳台阶的方法="+stepUp(5));
     }
