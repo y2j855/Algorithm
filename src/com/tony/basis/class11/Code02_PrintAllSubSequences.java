@@ -8,6 +8,8 @@ import java.util.*;
  * Description:
  * 利用递归打印字符串的所有子序列
  * 例子:abc,打印:a,ab,ac,abc,b,bc,c,不能生成ba
+ *
+ * TODO 如果要求统计字面值不同的子序列个数，需要动态规划实现
  */
 public class Code02_PrintAllSubSequences {
 

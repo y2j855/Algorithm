@@ -50,7 +50,7 @@ public class Code01_Hanoi {
 
     /**
      * 非递归解决汉诺塔问题
-     * @param N`
+     * @param N
      */
     public static void hanoi2(int N){
         if (N < 1) {
