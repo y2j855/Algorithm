@@ -134,11 +134,11 @@ public class Code02_PrintAllSubSequences {
 
     public static void main(String[] args) {
 //        printSubString("abc");
-        List<String> strs = printSubSequence1("aac");
+        List<String> strs = printSubSequence1("aaa");
         for (String str : strs) {
             System.out.println(str);
         }
-        List<String> s2 = printSubSequence2("aac");
+        List<String> s2 = printSubSequence2("aaa");
         for (String str : s2) {
             System.out.println(str);
         }
