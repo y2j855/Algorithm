@@ -104,6 +104,7 @@ public class Code8_NQueens {
         while (pos != 0) {
             //pos中提取最右侧的1.剩下都为0
             mostRightOne = pos & ((~pos) + 1);
+            //减的目的是为了把可以放皇后的位置范围减小，比如我有3个1，每次减就减少一个1，可以用^(异或)替代减号
             pos = pos - mostRightOne;
 
             result += process2(limit, colLim | mostRightOne,
