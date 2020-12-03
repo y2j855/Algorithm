@@ -17,6 +17,9 @@ import java.util.Map;
 public class Code05_ConvertToLetterString {
 
     public static int number(String str) {
+        if (str == null || str.length() == 0) {
+            return 0;
+        }
         return process1(str.toCharArray(), 0);
     }
 
@@ -99,11 +102,50 @@ public class Code05_ConvertToLetterString {
         return process1(chars, index + 1);
     }
 
+    /**
+     * 利用动态规划解决此问题
+     * 逻辑思路
+     * 1.通过暴力递归知道可变参数是一个一维数组，并且返回0下标的值
+     * 2.通过暴力递归的代码，我们知道需要从N-1开始循环遍历
+     * 3.将暴力递归的代码拷下来，改成非暴力递归的。
+     * @param str
+     * @return
+     */
+    public static int dpWay(String str) {
+        if (str == null || str.length() == 0) {
+            return 0;
+        }
+        char[] chars = str.toCharArray();
+        int N = chars.length;
+        int[] dp = new int[N + 1];
+        dp[N] = 1;
+
+        for (int i = N - 1; i >= 0; i--) {
+            if (chars[i] == '0') {
+                dp[i] = 0;
+            } else if (chars[i] == '1') {
+                dp[i] = dp[i + 1];
+                if (i + 1 < chars.length) {
+                    dp[i] += dp[i + 2];
+                }
+            } else if (chars[i] == '2') {
+                dp[i] = dp[i + 1];
+                if (i + 1 < chars.length && (chars[i + 1] >= '0' && chars[i + 1] <= '6')) {
+                    dp[i] += dp[i + 2];
+                }
+            } else {
+                dp[i] = dp[i + 1];
+            }
+        }
+
+        return dp[0];
+    }
+
     //TODO 通过动态规划解决此问题
 
     public static void main(String[] args) {
-        int number = number("11131");
-        System.out.println(number);
+        System.out.println(number("11131"));
+        System.out.println(dpWay("11131"));
     }
 
     private static int covertInt(char ch) {
