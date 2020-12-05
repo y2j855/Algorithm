@@ -61,7 +61,7 @@ public class Code05_LongestCommonSubsequence {
 
     public static void main(String[] args) {
         String s1 = "a123bc";
-        String s2 = "12dea3f";
+        String s2 = "12dea                                                                                 3f";
         System.out.println(lcse(s1, s2));
     }
 }
